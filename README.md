@@ -1,69 +1,86 @@
-# React + TypeScript + Vite
+# Practice Setup React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite + ESLint + Prettier のプラクティス用セットアップです。
 
-Currently, two official plugins are available:
+## セットアップ手順
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. リポジトリのクローン
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/Ryoma0101/practice-setup-react.git
+cd practice-setup-react
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Node.js のセットアップ
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**推奨：nvm を使用**
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# nvmがインストールされていない場合
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Node.js 20 をインストール・使用
+nvm install 20
+nvm use 20
 ```
+
+### 3. pnpm のインストール
+
+```bash
+npm install -g pnpm
+```
+
+### 4. 依存関係のインストール
+
+```bash
+pnpm install
+```
+
+## 利用可能なスクリプト
+
+| コマンド | 説明 |
+|----------|------|
+| `pnpm dev` | 開発サーバーを起動 |
+| `pnpm build` | プロダクション用にビルド |
+| `pnpm preview` | ビルドした内容をプレビュー |
+| `pnpm lint` | ESLintでコードチェック |
+| `pnpm lint:fix` | ESLintで自動修正可能な問題を修正 |
+| `pnpm format` | Prettierでコードフォーマット |
+| `pnpm format:check` | Prettierのフォーマットチェック |
+
+## 開発の流れ
+
+1. 開発サーバーを起動
+   ```bash
+   pnpm dev
+   ```
+
+2. コーディング
+
+3. コミット前にコードチェック
+   ```bash
+   pnpm lint
+   pnpm format:check
+   ```
+
+4. 必要に応じて自動修正
+   ```bash
+   pnpm lint:fix
+   pnpm format
+   ```
+
+## CI/CD
+
+GitHub Actions を使用して、プッシュ時に以下が自動実行されます：
+
+- ESLint によるコード品質チェック
+- Prettier によるフォーマットチェック
+- TypeScript の型チェック
+
+## 技術スタック
+
+- **フレームワーク**: React 19 + TypeScript
+- **ビルドツール**: Vite
+- **リンター**: ESLint
+- **フォーマッター**: Prettier
+- **パッケージマネージャー**: pnpm
