@@ -1,14 +1,16 @@
 import "./App.css";
 import { Button } from "./components/ui/button";
 function App() {
-    const handleClick = () => {
+  const handleClick = () => {
     console.log("Button clicked!");
     alert("Button clicked!");
   };
   return (
     <>
       {/* // 通常のボタン（default variant） */}
-      <Button className="text-black" onClick={handleClick}>クリック</Button>
+      <Button className="text-black" onClick={handleClick}>
+        クリック
+      </Button>
       {/* // 危険なアクション用のボタン（destructive variant） */}
       <Button variant="destructive">削除</Button>
       {/* // アウトライン型のボタン */}
